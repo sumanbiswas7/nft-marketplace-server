@@ -48,6 +48,12 @@ contract Marketplace is ReentrancyGuard {
         i_feeAccount = payable(msg.sender);
     }
 
+    /*
+    @notice: function to list an item
+    @param: _nft -> ERC721 NFT token 
+    @param: _tokenId -> nft tokenId
+    @param: _price -> to be sold at price
+     */
     function makeItem(
         IERC721 _nft,
         uint256 _tokenId,
@@ -69,6 +75,10 @@ contract Marketplace is ReentrancyGuard {
         emit Offered(itemCount, address(_nft), _price, _tokenId, msg.sender);
     }
 
+    /*
+    @notice: function to purchase an item
+    @param: _itemId -> marketplace id of the listed nft item 
+     */
     function purchaseItem(uint256 _itemId) external payable nonReentrant {
         uint256 totalPrice = getTotalPrice(_itemId);
         Item memory item = s_items[_itemId];
