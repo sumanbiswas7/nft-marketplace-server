@@ -11,9 +11,15 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
         log: true,
         waitConfirmations: 1
     })
+    const marketplace = await deploy("Marketplace", {
+        from: deployer,
+        args: [1],
+        log: true,
+        waitConfirmations: 1
+    })
 
-    console.log("---------------------------------------")
     saveFrontendFiles(nft, "NFT");
+    saveFrontendFiles(marketplace, "Marketplace");
 }
 
 function saveFrontendFiles(contract: DeployResult, name: string) {
